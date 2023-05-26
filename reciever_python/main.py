@@ -8,11 +8,11 @@ def listen():
     serversocket.listen(2)
 
     while True:
-        (clientsocket1, address1) = serversocket.accept()
-        (clientsocket2, address2) = serversocket.accept()
+        (clientsocket1, addr1) = serversocket.accept()
+        (clientsocket2, addr2) = serversocket.accept()
 
-        print('Connection address:', address1)
-        print('Connection address:', address2)
+        print('Connection address:', addr1)
+        print('Connection address:', addr2)
 
         ct1 = client_thread(clientsocket1)
         ct1.start()
