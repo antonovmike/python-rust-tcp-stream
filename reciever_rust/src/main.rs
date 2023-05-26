@@ -3,7 +3,7 @@ use std::net::TcpListener;
 use std::string::String;
 
 fn main() -> std::io::Result<()> {
-    let listener = TcpListener::bind("127.0.0.1:6006")?;
+    let listener = TcpListener::bind("127.0.0.1:8080")?;
     let mut buffer = [0; 96];
     println!("Connection address: {}", listener.local_addr()?);
 
@@ -18,3 +18,26 @@ fn main() -> std::io::Result<()> {
 
     Ok(())
 }
+
+// use std::io::{BufRead, BufReader};
+// use std::{
+//     net::{TcpListener, TcpStream},
+//     thread,
+// };
+
+// fn main() {
+//     let listener = TcpListener::bind("127.0.0.1:8080").unwrap();
+//     for stream in listener.incoming() {
+//         let stream = stream.unwrap();
+//         thread::spawn(move || {
+//             handle_stream(stream);
+//         });
+//     }
+// }
+
+// fn handle_stream(stream: TcpStream) {
+//     let mut reader = BufReader::new(stream);
+//     let mut message = String::new();
+//     reader.read_line(&mut message).unwrap();
+//     println!("{}", message);
+// }

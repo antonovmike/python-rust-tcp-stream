@@ -11,6 +11,9 @@ def listen():
         (clientsocket1, address1) = serversocket.accept()
         (clientsocket2, address2) = serversocket.accept()
 
+        print('Connection address:', address1)
+        print('Connection address:', address2)
+
         ct1 = client_thread(clientsocket1)
         ct1.start()
         ct2 = client_thread(clientsocket2)
