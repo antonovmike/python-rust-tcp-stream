@@ -1,20 +1,34 @@
 import socket
+import threading
 
-TCP_IP = '127.0.0.1'
-TCP_PORT = 6006
-BUFFER_SIZE = 96
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((TCP_IP, TCP_PORT))
-s.listen(1)
+def listen():
+    serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    serversocket.bind(("localhost", 8080))
+    serversocket.listen(2)
 
-conn, addr = s.accept()
-print('Connection address:', addr)
+    while True:
+        (clientsocket1, address1) = serversocket.accept()
+        (clientsocket2, address2) = serversocket.accept()
 
-while True:
-    data = conn.recv(BUFFER_SIZE)
-    if not data:
-        break
-    print("received data:", data.decode())
+        ct1 = client_thread(clientsocket1)
+        ct1.start()
+        ct2 = client_thread(clientsocket2)
+        ct2.start()
 
-conn.close()
+
+class client_thread(threading.Thread):
+    def __init__(self, clientsocket):
+        threading.Thread.__init__(self)
+        self.clientsocket = clientsocket
+
+    def run(self):
+        while True:
+            data = self.clientsocket.recv(1024)
+            if not data:
+                break
+            print(data)
+
+
+if __name__ == "__main__":
+    listen()
