@@ -13,7 +13,7 @@ fn main() -> std::io::Result<()> {
         stream.read(&mut buffer)?;
         let string = String::from_utf8_lossy(&buffer);
         let string = string.replace("\0", "");
-        println!("Received: {:?}", string);
+        println!("Received: {}", string);
     }
 
     Ok(())

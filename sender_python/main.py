@@ -11,4 +11,4 @@ s.connect((TCP_IP, TCP_PORT))
 
 while True:
     s.send(MESSAGE.encode())
-    time.sleep(10)
+    time.sleep(6)
